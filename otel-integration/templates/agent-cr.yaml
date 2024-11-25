@@ -1,0 +1,15 @@
+{{- if eq ((.Values.distribution)) "openshift" }}
+apiVersion: rbac.authorization.k8s.io/v1
+kind: ClusterRole
+metadata:
+  name: system:openshift:scc:{{ index .Values "opentelemetry-agent" "fullnameOverride" }}
+rules:
+- apiGroups:
+  - security.openshift.io
+  resourceNames:
+  - {{ index .Values "opentelemetry-agent" "fullnameOverride" }}
+  resources:
+  - securitycontextconstraints
+  verbs:
+  - use
+{{- end }}
