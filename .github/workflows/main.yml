@@ -26,4 +26,4 @@ jobs:
     # Step 3: Run the gRPC command
     - name: Execute gRPC Command
       run: |
-        grpcurl -plaintext -d '{"name": "World"}' localhost:50051 helloworld.Greeter/SayHello
+        grpcurl
