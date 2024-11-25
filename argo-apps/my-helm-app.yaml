@@ -11,7 +11,7 @@ spec:
     targetRevision: HEAD                                  # Git branch or tag (e.g., 'main')
     helm:
       valueFiles:
-        - otel-integration/values.yaml                      # Path to values.yaml
+        - values.yaml                      # Path to values.yaml
   destination:
     server: https://BC79CD4E2D16521DDCD09C3AB1717626.gr7.ap-south-1.eks.amazonaws.com            # Kubernetes cluster (default)
     namespace: default                                    # Target namespace
