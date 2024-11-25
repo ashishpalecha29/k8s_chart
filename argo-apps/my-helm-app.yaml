@@ -1,0 +1,19 @@
+apiVersion: argoproj.io/v1alpha1
+kind: Application
+metadata:
+  name: my-helm-app
+  namespace: argocd
+spec:
+  project: default
+  source:
+    repoURL: https://github.com/ashishpalecha29/k8s_chart.git   # Your GitHub repo URL
+    path: otel-integration                                  # Path to the Helm chart in the repo
+    targetRevision: HEAD                                  # Git branch or tag (e.g., 'main')
+    helm:
+      valueFiles:
+        - otel-integration/values.yaml                      # Path to values.yaml
+  destination:
+    server: https://BC79CD4E2D16521DDCD09C3AB1717626.gr7.ap-south-1.eks.amazonaws.com            # Kubernetes cluster (default)
+    namespace: default                                    # Target namespace
+  syncPolicy: {}
+
