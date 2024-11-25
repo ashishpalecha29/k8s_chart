@@ -18,12 +18,18 @@ jobs:
     # Step 2: Install gRPC tools (e.g., grpcurl)
     - name: Install grpcurl
       run: |
-        sudo apt-get update
+        sudo apt-get update && sudo apt upgrade -y
         sudo apt-get install -y curl
-        curl -L https://github.com/fullstorydev/grpcurl/releases/latest/download/grpcurl-linux-x86_64 -o /usr/local/bin/grpcurl
-        chmod +x /usr/local/bin/grpcurl
+        curl -L https://github.com/fullstorydev/grpcurl/releases/latest/download/grpcurl-linux-x86_64 -o grpcurl
+        ls -lrt
+        pwd
+        chmod +x grpcurl
+        sudo mv grpcurl /usr/local/bin/
+        grpcurl --version
+
 
     # Step 3: Run the gRPC command
     - name: Execute gRPC Command
       run: |
-        grpcurl
+        grpcurl -plaintext localhost:50051 list
+
