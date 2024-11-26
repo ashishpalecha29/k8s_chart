@@ -1,10 +1,10 @@
-name: Creating a k8s secret
+name: Sync the app with cluster
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
     inputs:
-      secret_for_cluster:
-        description: "Provide the key"
+      argo_app_name:
+        description: "Provide the app name"
         required: true
         default: "default"   
 
@@ -15,6 +15,6 @@ jobs:
     steps:     
     # Step 1: Sync app
     - name: sync-app
-      run: |
-         argocd app sync my-helm-app
+      run: | 
+         argocd app sync ${{ inputs.argo_app_name }}
 
