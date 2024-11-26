@@ -16,22 +16,15 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
+    #Step 2 Setting the cluster to deploy helm
+    - name: Setting the context  
+      run: |
+         kubectl config use-context ashish-test@ashish-cluster-test.ap-south-1.eksctl.io
+         kubectl config current-context
+         
 
-    # # Step 2: Install gRPC tools (e.g., grpcurl)
-    # - name: Install grpcurl
-    #   run: |
-    #     sudo apt-get update && sudo apt upgrade -y
-    #     sudo apt-get install -y curl
-    #     curl -L https://github.com/fullstorydev/grpcurl/releases/latest/download/grpcurl-linux-x86_64 -o grpcurl
-    #     ls -lrt
-    #     pwd
-    #     chmod +x grpcurl
-    #     sudo mv grpcurl /usr/local/bin/
-    #     ./grpcurl --version
-
-
-    # Step 2: Run the gRPC command
+    # Step 3: Creating secret
     - name: Execute gRPC Command
       run: |
-        grpcurl -plaintext localhost:50051 list
+        kubectl create secret generic coralogix-opentelemetry-key-test --from-literal=PRIVATE_KEY="cxtp_dLRA3MmuEDo4vaWAGj6OsdCGKhdtb9"
 
