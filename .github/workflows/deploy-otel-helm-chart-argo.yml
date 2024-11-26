@@ -7,6 +7,10 @@ on:
         description: "Provide the context"
         required: true
         default: "default"     
+      app_file:
+        description: "file_name to create app in argo"
+        required: true
+        default: "default"  
 
 jobs:
   App-argocd:
@@ -18,9 +22,9 @@ jobs:
       uses: actions/checkout@v3
 
     #Step 2 Setting the cluster to deploy helm
-    - name: Setting the context  
+    - name: Creating app in argo
       run: |
          kubectl config use-context ${{ inputs.cluster_context }}
          kubectl config current-context
-         kubectl apply -f argo-app/my-helm-app.yaml
+         kubectl apply -f argo-app/${{ inputs.app_file }}
 
