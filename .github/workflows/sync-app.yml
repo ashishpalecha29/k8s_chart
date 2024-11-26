@@ -1,0 +1,20 @@
+name: Creating a k8s secret
+
+on:
+  workflow_dispatch: # Allows manual triggering of the workflow
+    inputs:
+      secret_for_cluster:
+        description: "Provide the key"
+        required: true
+        default: "default"   
+
+jobs:
+  grpc-command:
+    runs-on: self-hosted  
+    
+    steps:     
+    # Step 1: Sync app
+    - name: sync-app
+      run: |
+         argocd app sync my-helm-app
+
