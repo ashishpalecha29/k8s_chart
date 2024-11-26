@@ -3,10 +3,10 @@ name: Deploying Otel via ArgoCD
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
     inputs:
-      secret_for_cluster:
-        description: "Provide the key"
-        required: false
-        default: "default"   
+      cluster_context:
+        description: "Provide the context"
+        required: true
+        default: "default"     
 
 jobs:
   App-argocd:
@@ -16,11 +16,11 @@ jobs:
     # Step 1: Checkout the repository
     - name: Checkout repository
       uses: actions/checkout@v3
-      
-    #Step 2 Creating an app into argo
+
+    #Step 2 Setting the cluster to deploy helm
     - name: Setting the context  
       run: |
-         kubectl config use-context ashish-test@ashish-cluster-test.ap-south-1.eksctl.io
+         kubectl config use-context ${{ inputs.cluster_context }}
          kubectl config current-context
          kubectl apply -f argo-app/my-helm-app.yaml
 
