@@ -27,7 +27,7 @@ jobs:
         echo "The passed variable is: ${{ inputs.secret_for_cluster}}"     
          
     # Step 3: Creating secret
-    - name: Execute gRPC Command
+    - name: Creating secret
       run: |
         SEC_VARIABLE=${{ inputs.secret_for_cluster }}
         kubectl create secret generic coralogix-opentelemetry-key-first --from-literal=PRIVATE_KEY="$SEC_VARIABLE"
