@@ -1,12 +1,12 @@
-name: Execute gRPC Command
-
-
+name: Creating a k8s secret
 
 on:
   workflow_dispatch: # Allows manual triggering of the workflow
-  push:
-    branches:
-      - main
+    inputs:
+      secret_for_cluster:
+        description: "Provide the key"
+        required: true
+        default: "default"   
 
 jobs:
   grpc-command:
@@ -21,10 +21,14 @@ jobs:
       run: |
          kubectl config use-context ashish-test@ashish-cluster-test.ap-south-1.eksctl.io
          kubectl config current-context
-         
 
+    - name: Display passed variable
+      run: |
+        echo "The passed variable is: ${{ inputs.secret_for_cluster}}"     
+         
     # Step 3: Creating secret
     - name: Execute gRPC Command
       run: |
-        kubectl create secret generic coralogix-opentelemetry-key-test --from-literal=PRIVATE_KEY="cxtp_dLRA3MmuEDo4vaWAGj6OsdCGKhdtb9"
+        SEC_VARIABLE=${{ inputs.secret_for_cluster }}
+        kubectl create secret generic coralogix-opentelemetry-key-test --from-literal=PRIVATE_KEY="$SEC_VARIABLE"
 
