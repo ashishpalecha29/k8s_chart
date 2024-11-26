@@ -24,6 +24,8 @@ jobs:
     #Step 2 Setting the cluster to deploy helm
     - name: Creating app in argo
       run: |
+         pwd
+         ls -lrt
          kubectl config use-context ${{ inputs.cluster_context }}
          kubectl config current-context
          kubectl apply -f argo-app/${{ inputs.app_file }}
