@@ -28,5 +28,5 @@ jobs:
          ls -lrt
          kubectl config use-context ${{ inputs.cluster_context }}
          kubectl config current-context
-         kubectl apply -f argo-app/${{ inputs.app_file }}
+         kubectl apply -f argo-apps/${{ inputs.app_file }}
 
