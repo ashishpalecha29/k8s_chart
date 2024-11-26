@@ -25,7 +25,7 @@ jobs:
         pwd
         chmod +x grpcurl
         sudo mv grpcurl /usr/local/bin/
-        grpcurl --version
+        ./grpcurl --version
 
 
     # Step 3: Run the gRPC command
