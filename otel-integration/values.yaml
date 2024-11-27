@@ -1,6 +1,6 @@
 global:
   domain: "coralogix.in"
-  clusterName: "manul-cluster"
+  clusterName: "myargo-cluster"
   defaultApplicationName: "otel"
   defaultSubsystemName: "integration"
   logLevel: "warn"
